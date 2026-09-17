@@ -8,6 +8,7 @@ import com.rumpilstilstkin.gloommaster.bd.entity.MonsterAbilityCardBd
 import com.rumpilstilstkin.gloommaster.bd.entity.MonsterAbilityCardTranslationBd
 import com.rumpilstilstkin.gloommaster.bd.entity.MonsterBd
 import com.rumpilstilstkin.gloommaster.bd.entity.MonsterStatsBd
+import com.rumpilstilstkin.gloommaster.bd.entity.MonsterStatsSeedBd
 import com.rumpilstilstkin.gloommaster.bd.entity.MonsterTextStatsBd
 import com.rumpilstilstkin.gloommaster.bd.entity.MonsterTranslationsBd
 import com.rumpilstilstkin.gloommaster.bd.entity.MonsterWithNameBd
@@ -130,16 +131,13 @@ interface MonsterDao {
     suspend fun insertMonster(monster: MonsterBd): Long
 
     @Insert
-    suspend fun insertMonsters(vararg monsters: MonsterBd)
+    suspend fun insertMonsters(monsters: List<MonsterBd>)
 
     @Insert
-    suspend fun insertTranslations(vararg translations: MonsterTranslationsBd)
+    suspend fun insertMonsterTranslations(translations: List<MonsterTranslationsBd>)
 
     @Insert
-    suspend fun insertTranslations(vararg translations: MonsterTextStatsBd)
-
-    @Insert
-    suspend fun insertCardTranslations(vararg translations: MonsterAbilityCardTranslationBd)
+    suspend fun insertCardTranslations(translations: List<MonsterAbilityCardTranslationBd>)
 
     @Query("DELETE FROM MonsterBd")
     suspend fun deleteAllMonsters()
@@ -181,11 +179,11 @@ interface MonsterDao {
     @Insert
     suspend fun insertStats(stats: MonsterStatsBd)
 
-    @Insert
-    suspend fun insertAllStats(vararg stats: MonsterStatsBd)
+    @Insert(entity = MonsterStatsBd::class)
+    suspend fun insertAllStats(stats: List<MonsterStatsSeedBd>)
 
     @Insert
-    suspend fun insertAllTextStats(vararg stats: MonsterTextStatsBd)
+    suspend fun insertAllTextStats(stats: List<MonsterTextStatsBd>)
 
     @Query("DELETE FROM MonsterStatsBd")
     suspend fun deleteAllStats()
@@ -218,7 +216,7 @@ interface MonsterDao {
     suspend fun insertCard(card: MonsterAbilityCardBd): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCards(vararg cards: MonsterAbilityCardBd)
+    suspend fun insertCards(cards: List<MonsterAbilityCardBd>)
 
     @Query("DELETE FROM MonsterAbilityCardBd")
     suspend fun deleteAllCards()

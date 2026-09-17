@@ -86,8 +86,8 @@ interface ScenarioDao {
     ): List<ScenarioWithNameBd>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg scenarios: ScenarioBd)
+    suspend fun insertAllScenario(scenarios: List<ScenarioBd>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg translations: ScenarioTranslationsBd)
+    suspend fun insertAllScenarioTranslations(translations: List<ScenarioTranslationsBd>)
 }

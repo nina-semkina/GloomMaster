@@ -58,8 +58,8 @@ interface AchievementDao {
     ): List<AchievementTranslateBd>
 
     @Insert
-    suspend fun insertAll(vararg achievements: AchievementBd)
+    suspend fun insertAchievements(achievements: List<AchievementBd>)
 
     @Insert
-    suspend fun insertAll(vararg achievements: AchievementTranslateBd)
+    suspend fun insertAchievementTranslations(achievements: List<AchievementTranslateBd>)
 }

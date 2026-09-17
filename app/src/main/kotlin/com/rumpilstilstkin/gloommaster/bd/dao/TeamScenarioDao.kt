@@ -12,7 +12,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TeamScenarioDao {
     @Insert
-    suspend fun insertAll(vararg scenarios: TeamScenarioBd)
+    suspend fun insertAll(scenarios: List<TeamScenarioBd>)
+
+    @Insert
+    suspend fun insert(scenario: TeamScenarioBd)
 
     @Update
     suspend fun update(team: TeamScenarioBd)

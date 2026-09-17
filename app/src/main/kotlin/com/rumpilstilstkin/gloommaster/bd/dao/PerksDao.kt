@@ -9,13 +9,13 @@ import com.rumpilstilstkin.gloommaster.bd.entity.PerkTranslationBd
 @Dao
 interface PerksDao {
     @Insert
-    suspend fun insertAll(vararg users: PerkBd)
+    suspend fun insertPerks(perks: List<PerkBd>)
 
     @Insert
     suspend fun insert(perk: PerkBd): Long
 
     @Insert
-    suspend fun insertAll(vararg translations: PerkTranslationBd)
+    suspend fun insertTranslations(translations: List<PerkTranslationBd>)
 
     @Query(
         """

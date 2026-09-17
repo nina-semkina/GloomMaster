@@ -13,7 +13,7 @@ class LocationJsonFiller @Inject constructor(
         val data =
             jsonDataLoader.loadDictionaryList<LocationJson>("locations.json", pack)
         val entities = data.map { it.toEntity() }
-        dao.insertAll(*entities.toTypedArray())
+        dao.insertAllLocation(entities)
         jsonDataLoader.getLocalesForPack(pack).forEach { locale ->
             fillTranslations(pack, locale)
         }
@@ -29,6 +29,6 @@ class LocationJsonFiller @Inject constructor(
                 "$pack/$locale",
             )
         val translationsEntities = translations.map { it.toEntity(locale) }
-        dao.insertAll(*translationsEntities.toTypedArray())
+        dao.insertAllLocationTranslate(translationsEntities)
     }
 }

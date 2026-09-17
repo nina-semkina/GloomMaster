@@ -13,7 +13,7 @@ class AchievementJsonFiller @Inject constructor(
         val data =
             jsonDataLoader.loadDictionaryList<AchievementJson>("achievements.json", pack)
         val entities = data.map { it.toEntity() }
-        achievementDao.insertAll(*entities.toTypedArray())
+        achievementDao.insertAchievements(entities)
         jsonDataLoader.getLocalesForPack(pack).forEach { locale ->
             fillTranslations(pack, locale)
         }
@@ -29,6 +29,6 @@ class AchievementJsonFiller @Inject constructor(
                 "$pack/$locale",
             )
         val translationsEntities = translations.map { it.toEntity(locale) }
-        achievementDao.insertAll(*translationsEntities.toTypedArray())
+        achievementDao.insertAchievementTranslations(translationsEntities)
     }
 }

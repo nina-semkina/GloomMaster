@@ -2,9 +2,9 @@ package com.rumpilstilstkin.gloommaster.bd.filler.json.models
 
 import com.rumpilstilstkin.gloommaster.bd.entity.MonsterBd
 import com.rumpilstilstkin.gloommaster.bd.entity.MonsterTranslationsBd
-import com.rumpilstilstkin.gloommaster.domain.entity.monster.MonsterAction
 import com.rumpilstilstkin.gloommaster.domain.entity.monster.MonsterStatType
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonArray
 
 @Serializable
 data class MonsterJson(
@@ -52,7 +52,7 @@ data class MonsterLevelStatsJson(
     val level: Int,
     val isElite: Boolean,
     val life: Int,
-    val stats: List<MonsterAction>,
+    val stats: JsonArray,
 )
 
 @Serializable
