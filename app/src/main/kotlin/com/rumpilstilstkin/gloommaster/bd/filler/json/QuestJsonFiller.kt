@@ -12,7 +12,7 @@ class QuestJsonFiller @Inject constructor(
     suspend fun fill(pack: String) {
         val quests = jsonDataLoader.loadDictionaryList<PersonalQuestJson>("quests.json", pack)
         val entities = quests.map { it.toEntity() }
-        personalQuestDao.insertAll(*entities.toTypedArray())
+        personalQuestDao.insertAllPersonalQuest(entities)
 
         jsonDataLoader.getLocalesForPack(pack).forEach { locale ->
             fillTranslations(pack, locale)
@@ -26,12 +26,12 @@ class QuestJsonFiller @Inject constructor(
         val translations =
             jsonDataLoader.loadDictionaryListOrEmpty<PersonalQuestTranslationJson>("quests.json", "$pack/$locale")
         val questTranslations = translations.map { it.toEntity(locale) }
-        personalQuestDao.insertTranslations(*questTranslations.toTypedArray())
+        personalQuestDao.insertTranslations(questTranslations)
 
         val taskTranslations =
             translations.flatMap { quest ->
                 quest.taskTexts.map { task -> task.toEntity(quest.questId, locale) }
             }
-        personalQuestDao.insertTaskTranslations(*taskTranslations.toTypedArray())
+        personalQuestDao.insertTaskTranslations(taskTranslations)
     }
 }

@@ -180,13 +180,13 @@ class ScenarioRepositoryTest {
     }
 
     @Test
-    fun `given a scenarioNumber and teamId when saveTeamScenario then DAO insertAll receives the matching entity`() = runTest {
+    fun `given a scenarioNumber and teamId when saveTeamScenario then DAO insert receives the matching entity`() = runTest {
         // When
         sut.saveTeamScenario(scenarioNumber = 5, teamId = 10)
 
         // Then
         coVerify(exactly = 1) {
-            teamScenarioDao.insertAll(
+            teamScenarioDao.insert(
                 TeamScenarioBd(teamId = 10, scenarioNumber = 5),
             )
         }
@@ -203,8 +203,10 @@ class ScenarioRepositoryTest {
         // Then
         coVerify(exactly = 1) {
             teamScenarioDao.insertAll(
-                TeamScenarioBd(teamId = 10, scenarioNumber = 1, completed = true),
-                TeamScenarioBd(teamId = 10, scenarioNumber = 2, completed = false),
+                listOf(
+                    TeamScenarioBd(teamId = 10, scenarioNumber = 1, completed = true),
+                    TeamScenarioBd(teamId = 10, scenarioNumber = 2, completed = false),
+                ),
             )
         }
     }

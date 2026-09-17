@@ -101,7 +101,7 @@ class ScenarioRepository @Inject constructor(
         scenarioNumber: Int,
         teamId: Int,
     ) {
-        teamScenarioDao.insertAll(
+        teamScenarioDao.insert(
             TeamScenarioBd(
                 teamId = teamId,
                 scenarioNumber = scenarioNumber,
@@ -114,14 +114,14 @@ class ScenarioRepository @Inject constructor(
         teamId: Int,
     ) {
         teamScenarioDao.insertAll(
-            *scenarios
+            scenarios
                 .map { (number, completed) ->
                     TeamScenarioBd(
                         teamId = teamId,
                         scenarioNumber = number,
                         completed = completed,
                     )
-                }.toTypedArray(),
+                },
         )
     }
 

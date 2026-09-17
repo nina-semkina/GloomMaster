@@ -15,7 +15,7 @@ class GoodJsonFiller @Inject constructor(
             data.flatMap { good ->
                 List(good.count) { good.toEntity() }
             }
-        goodsDao.insertAll(*entities.toTypedArray())
+        goodsDao.insertAllGoods(entities)
         jsonDataLoader.getLocalesForPack(pack).forEach { locale ->
             fillTranslations(pack, locale)
         }
@@ -31,6 +31,6 @@ class GoodJsonFiller @Inject constructor(
                 "$pack/$locale",
             )
         val translationsEntities = translations.map { it.toEntity(locale) }
-        goodsDao.insertAll(*translationsEntities.toTypedArray())
+        goodsDao.insertAllGoodTranslations(translationsEntities)
     }
 }

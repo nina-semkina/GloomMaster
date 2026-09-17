@@ -91,16 +91,9 @@ class ScenarioBattleStateTest {
     private fun unit(
         number: Int,
         currentLife: Int,
-    ) = MonsterUnit(
+    ) = MonsterUnit.fixture(
         number = number,
         currentLife = currentLife,
         maxLife = 10,
-        stats = listOf(),
-        isSpecial = false,
-        effects = mapOf(),
-        immunity = setOf(),
-        level = 1,
-        isNew = false,
-        lifeMultiple = false
     )
 }

@@ -12,9 +12,11 @@ class PerkJsonFiller @Inject constructor(
     private val perksDao: PerksDao,
 ) {
     suspend fun fill(pack: String) {
-        val data = jsonDataLoader.loadDictionaryList<CharacterPerksJson>("perks.json", pack)
-        val entities = data.map { PerkBd(it.perksCount, it.characterType) }
-        perksDao.insertAll(*entities.toTypedArray())
+        val data =
+            jsonDataLoader
+                .loadDictionaryList<CharacterPerksJson>("perks.json", pack)
+                .map { PerkBd(it.perksCount, it.characterType) }
+        perksDao.insertPerks(data)
 
         jsonDataLoader.getLocalesForPack(pack).forEach { locale ->
             fillTranslations(pack, locale)
@@ -27,8 +29,8 @@ class PerkJsonFiller @Inject constructor(
     ) {
         val translationGroups =
             jsonDataLoader.loadDictionaryListOrEmpty<PerkTranslationGroupJson>("perks.json", "$pack/$locale")
-        translationGroups.forEach { group ->
-            val entities =
+        val entities =
+            translationGroups.flatMap { group ->
                 group.perks.map {
                     PerkTranslationBd(
                         perkId = it.id,
@@ -37,7 +39,7 @@ class PerkJsonFiller @Inject constructor(
                         characterType = group.characterType,
                     )
                 }
-            perksDao.insertAll(*entities.toTypedArray())
-        }
+            }
+        perksDao.insertTranslations(entities)
     }
 }

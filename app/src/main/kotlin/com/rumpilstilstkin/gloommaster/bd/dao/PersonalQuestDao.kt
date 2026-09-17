@@ -57,11 +57,11 @@ interface PersonalQuestDao {
     suspend fun getQuest(questId: String): PersonalQuestBd
 
     @Insert
-    suspend fun insertAll(vararg quests: PersonalQuestBd)
+    suspend fun insertAllPersonalQuest(quests: List<PersonalQuestBd>)
 
     @Insert
-    suspend fun insertTranslations(vararg translations: PersonalQuestTranslationsBd)
+    suspend fun insertTranslations(translations: List<PersonalQuestTranslationsBd>)
 
     @Insert
-    suspend fun insertTaskTranslations(vararg translations: PersonalQuestTaskTranslationsBd)
+    suspend fun insertTaskTranslations(translations: List<PersonalQuestTaskTranslationsBd>)
 }

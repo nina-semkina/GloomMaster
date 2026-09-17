@@ -42,10 +42,10 @@ interface GoodsDao {
     ): List<GoodWithTranslation>
 
     @Insert
-    suspend fun insertAll(vararg users: GoodBd)
+    suspend fun insertAllGoods(goods: List<GoodBd>)
 
     @Insert
-    suspend fun insertAll(vararg translations: GoodTranslationsBd)
+    suspend fun insertAllGoodTranslations(translations: List<GoodTranslationsBd>)
 
     @Query(
         """

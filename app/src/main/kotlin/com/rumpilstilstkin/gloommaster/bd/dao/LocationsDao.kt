@@ -8,8 +8,8 @@ import com.rumpilstilstkin.gloommaster.bd.entity.LocationTranslateBd
 @Dao
 interface LocationsDao {
     @Insert
-    suspend fun insertAll(vararg achievements: LocationBd)
+    suspend fun insertAllLocation(locations: List<LocationBd>)
 
     @Insert
-    suspend fun insertAll(vararg achievements: LocationTranslateBd)
+    suspend fun insertAllLocationTranslate(locations: List<LocationTranslateBd>)
 }

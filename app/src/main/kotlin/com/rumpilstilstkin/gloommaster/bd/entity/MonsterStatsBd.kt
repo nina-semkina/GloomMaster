@@ -28,6 +28,14 @@ data class MonsterStatsBd(
     val stats: List<MonsterAction>,
 )
 
+data class MonsterStatsSeedBd(
+    val monsterSlug: String,
+    val scenarioLevel: Int,
+    val isElite: Boolean,
+    val life: Int,
+    val stats: String,
+)
+
 @Entity(
     primaryKeys = ["monsterSlug", "scenarioLevel", "isElite", "locale"],
     foreignKeys = [
