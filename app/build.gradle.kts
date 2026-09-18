@@ -19,8 +19,8 @@ android {
     defaultConfig {
         applicationId = "com.rumpilstilstkin.gloommaster"
         minSdk = 29
-        versionCode = 16
-        versionName = "2.0.6"
+        versionCode = 17
+        versionName = "2.0.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
